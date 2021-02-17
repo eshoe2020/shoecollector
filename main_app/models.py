@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 COLORS = (
     ('A', 'Animal'),
@@ -50,26 +51,33 @@ STYLES = (
 )
 
 class Shoe(models.Model):
-    brand = models.CharField(max_length=250)
+    brand = models.CharField(
+        max_length=250)
     style = models.CharField(
         max_length=2,
         choices=STYLES,
         default=STYLES[0][0]   
     )
     size = models.CharField(
+        'Size:',
         max_length=4,
         choices=SIZES,
         default=SIZES[0][0]
     )
     color = models.CharField(
+        'Color:',
         max_length=2,
         choices =COLORS,
         default=COLORS[0][0]
     )
-    description = models.TextField(max_length=500)
+    description = models.TextField(
+        'Description:',
+        max_length=1000)
    
-
 
     def __str__(self):
         return self.brand
+        return self.style
     
+    def get_absolute_url(self):
+        return reverse('shoes_detail', kwargs={'shoe_id': self.id})

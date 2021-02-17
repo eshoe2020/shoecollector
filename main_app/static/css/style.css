@@ -12,3 +12,9 @@ body {
     padding-top: 0;
     text-align: right;
   }
+
+  .select-wrapper+label {
+    /* position: absolute; */
+    top: -26px;
+    font-size: .8rem;
+}

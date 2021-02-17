@@ -1,0 +1,22 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<h1>Add Shoes</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_table}}
+
+    <input type="submit" value="Add Shoes" class="btn">
+
+</form>
+
+<script>
+    var selectEl = document.getElementById('id_style');
+    M.FormSelect.init(selectEl);
+    var selectEl = document.getElementById('id_size');
+    M.FormSelect.init(selectEl);
+    var selectEl = document.getElementById('id_color');
+    M.FormSelect.init(selectEl);
+</script>
+{% endblock %}
