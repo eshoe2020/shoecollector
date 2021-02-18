@@ -51,8 +51,16 @@ STYLES = (
 )
 
 class Shoe(models.Model):
+    name = models.CharField(
+        max_length=250, default='Please enter name of shoe'
+    )
+    designer = models.BooleanField(
+        'Designer:',
+        default=False, 
+    )
     brand = models.CharField(
-        max_length=250)
+        max_length=250
+    )
     style = models.CharField(
         max_length=2,
         choices=STYLES,
@@ -72,12 +80,12 @@ class Shoe(models.Model):
     )
     description = models.TextField(
         'Description:',
-        max_length=1000)
-   
+        max_length=1000
+    )
 
     def __str__(self):
         return self.brand
-        return self.style
+        return self.name
     
     def get_absolute_url(self):
         return reverse('shoes_detail', kwargs={'shoe_id': self.id})

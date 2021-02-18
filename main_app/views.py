@@ -26,4 +26,4 @@ class ShoeDelete(DeleteView):
 
 class ShoeUpdate(UpdateView):
     model = Shoe
-    fields = ['size', 'color', 'description']
+    fields = ['name', 'designer', 'brand','style', 'size', 'color', 'description']

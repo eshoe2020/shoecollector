@@ -6,7 +6,17 @@
 
 <div class="card">
         <div class="card-content">
-            <span class="card-title">{{ shoe.brand }} {{ shoe.get_style_display }}</span>
+            <class class="card-title">The {{ shoe.name }} by {{shoe.brand}}</class>
+                {% if shoe.designer == True %}
+            <p>
+                <i class="material-icons">star_border</i>
+                Designer
+                <i class="material-icons">star_border</i>
+            </p>
+                {% else %}
+            <p>Brand: {{shoe.brand}}</p>
+                {% endif %}
+            <p>Style: {{ shoe.get_style_display }}</p>
             <p>Size: {{ shoe.size }}</p>
             <p>Color: {{ shoe.get_color_display }}</p>
             <p>Description: {{ shoe.description }}</p>

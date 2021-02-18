@@ -13,8 +13,11 @@ body {
     text-align: right;
   }
 
-  .select-wrapper+label {
-    /* position: absolute; */
-    top: -26px;
-    font-size: .8rem;
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+  position: static!important;
+  left: 0px!important;
+  opacity: 1!important;
+  visibility: visible!important;
+  pointer-events: all!important;
 }
