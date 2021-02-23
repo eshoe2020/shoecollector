@@ -3,28 +3,59 @@
 
 <h1>Shoe Specs</h1>
 
-
 <div class="card">
         <div class="card-content">
-            <class class="card-title">The {{ shoe.name }} by {{shoe.brand}}</class>
+            <span class="card-title">
+                The {{ shoe.name }} by {{shoe.brand}}
+            </span>
                 {% if shoe.designer == True %}
-            <p>
-                <i class="material-icons">star_border</i>
-                Designer
-                <i class="material-icons">star_border</i>
-            </p>
-                {% else %}
-            <p>Brand: {{shoe.brand}}</p>
-                {% endif %}
-            <p>Style: {{ shoe.get_style_display }}</p>
-            <p>Size: {{ shoe.size }}</p>
-            <p>Color: {{ shoe.get_color_display }}</p>
-            <p>Description: {{ shoe.description }}</p>
+                <p>
+                    <i class="material-icons">star_border</i>
+                    Designer
+                    <i class="material-icons">star_border</i>
+                </p>
+                    {% else %}
+                <p>Brand: {{shoe.brand}}</p>
+                    {% endif %}
+                <p>Style: {{ shoe.get_style_display }}</p>
+                <p>Size: {{ shoe.size }}</p>
+                <p>Color: {{ shoe.get_color_display }}</p>
+                <p>Description: {{ shoe.description }}</p>
         </div>
+
         <div class="card-action">
             <a href="{% url 'shoes_update' shoe.id %}">Edit Shoes</a>
             <a href="{% url 'shoes_delete' shoe.id %}">Delete Shoes</a>
         </div>
 </div>
+<div class="row"> 
+    <div class="col s6"> 
+        <div class="card">
+            <div class="card-content">
+            {% for photo in shoe.photo_set.all %}
+                <img class="responsive-img card-panel" src="{{photo.url}}">
+              {% empty %}
+                <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+        
+        <div class="col s6"> 
+            <div class="card">
+                <div class="card-content">
+                    <form action="{% url 'add_photo' shoe.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+                        {% csrf_token %}
+                        <input type="file" name="photo-file">
+                        <br><br>
+                        <input type="submit" class="btn" value="Upload Photo">
+                    </form>
+                </div>
+            </div>
+        </div> 
+    </div> 
 
+
+
+</div>
 {% endblock %}
