@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>List of Reputable Replica Sellers</h1>
+
+{% for replica in replica_list %}
+  <a href="{% url 'replicas_detail' replica.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ replica.name }}</span>
+            <p>Website: {{ replica.website }}</p>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}

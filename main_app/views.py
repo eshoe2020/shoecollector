@@ -2,7 +2,8 @@ import uuid
 import boto3
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Shoe, Photo
+from django.views.generic import ListView, DetailView
+from .models import Shoe, Replica, Photo
 
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'shoecollector-hsu' 
@@ -50,3 +51,33 @@ class ShoeDelete(DeleteView):
 class ShoeUpdate(UpdateView):
     model = Shoe
     fields = ['name', 'designer', 'brand','style', 'size', 'color', 'description']
+
+
+class ReplicaList(ListView):
+  model = Replica
+
+class ReplicaDetail(DetailView):
+  model = Replica
+
+class ReplicaCreate(CreateView):
+  model = Replica
+  fields = '__all__'
+
+class ReplicaUpdate(UpdateView):
+  model = Replica
+  fields = '__all__'
+
+class ReplicaDelete(DeleteView):
+  model = Replica
+  success_url = '/replicas/'
+
+
+
+def assoc_replica(request, shoe_id, replica_id):
+  Shoe.objects.get(id=shoe_id).replicas.add(replica_id)
+  return redirect('shoes_detail', shoe_id=shoe_id)
+
+
+def unassoc_replica(request, shoe_id, replica_id):
+  Shoe.objects.get(id=shoe_id).replicas.remove(replica_id)
+  return redirect('shoes_detail', shoe_id=shoes_id)

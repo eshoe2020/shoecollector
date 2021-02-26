@@ -53,6 +53,15 @@ STYLES = (
     ('We', 'Wedges/Platforms')
 )
 
+class Replica(models.Model):
+    name = models.CharField(max_length=250)
+    website = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+    # def get_absolute_url(self):
+    #     return reverse('replicas_detail', kwargs={'pk': self.id}) 
 
 class Shoe(models.Model):
     name = models.CharField(
@@ -101,3 +110,5 @@ class Photo(models.Model):
 
     def __str__(self):
         return f"Photo for shoe_id: {self.shoe_id} @ {self.url}"
+
+    
