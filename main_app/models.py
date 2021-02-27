@@ -60,8 +60,8 @@ class Replica(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return reverse('replicas_detail', kwargs={'pk': self.id}) 
+    def get_absolute_url(self):
+        return reverse('replicas_detail', kwargs={'pk': self.id}) 
 
 class Shoe(models.Model):
     name = models.CharField(
@@ -95,6 +95,7 @@ class Shoe(models.Model):
         'Description:',
         max_length=1000
     )
+    replicas = models.ManyToManyField(Replica)
 
     def __str__(self):
         return self.brand

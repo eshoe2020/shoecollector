@@ -1,5 +1,6 @@
 import uuid
 import boto3
+from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
@@ -21,8 +22,10 @@ def shoes_index(request):
 
 def shoes_detail(request, shoe_id):
     shoe = Shoe.objects.get(id=shoe_id)
+    replicas_shoe_doesnt_have = Replica.objects.exclude(id__in = shoe.replicas.all().values_list('id'))
     return render(request, 'shoes/detail.html', 
-    {'shoe': shoe
+    {'shoe': shoe,
+    'available_replicas':replicas_shoe_doesnt_have
     })
 
 
